@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  /* Brand colours */
+  --color-brand-navy:       #1B3045;
+  --color-brand-navy-dark:  #0f1e2e;
+  --color-brand-navy-light: #2a4a68;
+  --color-brand-gold:       #C9A84C;
+  --color-brand-gold-light: #F5EDD6;
+  --color-brand-surface:    #F4F6F8;
+  --color-brand-cream:      #FDFCFB;
+  --color-brand-muted:      #4B5768;
+
+  /* Typography */
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, sans-serif;
+}
+
+/* ── Global resets ── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background-color: #ffffff;
+  color: #1B3045;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Override the scaffold's constrained #root */
+#root {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  text-align: left;
+  border: none;
+  min-height: 100svh;
+  display: block;
+}
+
+/* ── Animations ── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeInUp 0.7s ease-out forwards;
+}
+
+.animate-fade-in-delay {
+  opacity: 0;
+  animation: fadeInUp 0.7s ease-out 0.2s forwards;
+}
+
+.animate-fade-in-delay-2 {
+  opacity: 0;
+  animation: fadeInUp 0.7s ease-out 0.4s forwards;
+}
