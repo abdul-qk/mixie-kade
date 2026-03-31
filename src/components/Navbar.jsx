@@ -33,11 +33,11 @@ export default function Navbar() {
           scrolled ? 'shadow-md border-b border-brand-surface' : ''
         }`}
       >
-        <nav className="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-16">
+        <nav className="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-20">
 
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <img src="/logo.jpeg" alt="Mixie Kadai" className="h-10 w-auto object-contain" />
+            <img src="/logo.jpeg" alt="Mixie Kadai" className="h-15 w-auto object-contain" />
           </Link>
 
           {/* Desktop nav links */}
