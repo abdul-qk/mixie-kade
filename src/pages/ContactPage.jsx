@@ -1,7 +1,7 @@
 import { useState } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { useReveal } from '../hooks/useReveal'
 
-// TODO: Replace with Hashim's WhatsApp number (digits only, no + or spaces)
 const WHATSAPP = '94776952531'
 
 const contactInfo = [
@@ -67,6 +67,10 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      <Helmet>
+        <title>Contact Mixie Kadai | Visit Us in Jaffna, Sri Lanka</title>
+        <meta name="description" content="Contact Mixie Kadai at 771 Jaffna-Kankesanturai Rd, Jaffna 40000. Open Mon–Sat 9am–7pm. Send us a WhatsApp message or visit our store." />
+      </Helmet>
 
       {/* ── Page Hero ─────────────────────────────────────────────── */}
       <div className="bg-brand-navy text-white py-20 px-6">

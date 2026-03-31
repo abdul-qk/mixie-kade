@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 import { getProducts } from '../lib/api'
 import { useCart } from '../context/CartContext'
 
@@ -101,6 +102,11 @@ export default function ShopPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      <Helmet>
+        <title>Shop Mixer Grinders &amp; Kitchen Appliances | Mixie Kadai</title>
+        <meta name="description" content="Browse 20+ mixer grinder models, blenders, coconut scrapers, jars, genuine spare parts & accessories. Free islandwide delivery over Rs. 5,000." />
+      </Helmet>
+
       {/* Page header */}
       <div className="bg-brand-navy text-white py-14 px-6">
         <div className="max-w-7xl mx-auto">

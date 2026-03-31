@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 import { getProduct } from '../lib/api'
 import { useCart } from '../context/CartContext'
 
@@ -49,8 +50,33 @@ export default function ProductPage() {
 
   const images = product.images?.filter(i => i.url) || []
 
+  const productSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.name,
+    image: product.images?.filter(i => i.url).map(i => i.url),
+    offers: {
+      '@type': 'Offer',
+      price: product.price,
+      priceCurrency: 'LKR',
+      availability: product.inStock !== false
+        ? 'https://schema.org/InStock'
+        : 'https://schema.org/OutOfStock',
+      seller: { '@type': 'Organization', name: 'Mixie Kadai' },
+    },
+    ...(product.wattage && { description: `${product.wattage}W mixer grinder. ${product.warranty || ''}`.trim() }),
+  }
+
   return (
     <div className="min-h-screen bg-white">
+      <Helmet>
+        <title>{product.name} — Buy Online | Mixie Kadai</title>
+        <meta name="description" content={`Buy the ${product.name} from Mixie Kadai.${product.wattage ? ` ${product.wattage}W.` : ''} Genuine product, islandwide delivery from Jaffna, Sri Lanka. Rs. ${product.price?.toLocaleString()}.`} />
+        {product.images?.[0]?.url && <meta property="og:image" content={product.images[0].url} />}
+        <meta property="og:title" content={`${product.name} | Mixie Kadai`} />
+        <script type="application/ld+json">{JSON.stringify(productSchema)}</script>
+      </Helmet>
+
       <div className="max-w-7xl mx-auto px-6 lg:px-10 py-10">
         {/* Breadcrumb */}
         <nav className="font-body text-sm text-brand-muted mb-8 flex items-center gap-2">

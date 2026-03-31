@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 import { useReveal } from '../hooks/useReveal'
 
 const stats = [
@@ -28,6 +29,10 @@ export default function AboutPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      <Helmet>
+        <title>About Mixie Kadai | Jaffna's Kitchen Appliance Specialists</title>
+        <meta name="description" content="Mixie Kadai is Jaffna's trusted kitchen appliance store. Founded by Hashim Huzefa, we stock 20+ mixer grinder models and 50+ genuine spare parts with islandwide delivery." />
+      </Helmet>
 
       {/* ── 1. Page Hero ──────────────────────────────────────────── */}
       <div className="bg-brand-navy text-white py-20 px-6">
