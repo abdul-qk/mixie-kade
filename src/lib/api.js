@@ -56,25 +56,14 @@ export async function getProduct(slug) {
  */
 export async function placeOrder({ customerName, phone, address, city, notes, items, total }) {
   const payload = {
-    // Standard ecommerce plugin fields
-    status: 'processing',
-    amount: total,
-    customerEmail: null,
-    shippingAddress: {
-      firstName: customerName?.split(' ')[0] || customerName,
-      lastName:  customerName?.split(' ').slice(1).join(' ') || '',
-      addressLine1: address,
-      city,
-      country: 'LK',
-      phone,
-    },
-    // Custom Mixie Kadai COD fields
+    status:       'pending',
     customerName,
-    customerPhone: phone,
-    deliveryAddress: address,
-    deliveryCity:   city,
-    codNotes:       notes || '',
-    codItemsJson:   JSON.stringify(items),
+    phone,
+    address,
+    city,
+    notes:        notes || '',
+    items,   // array of { productName, productSlug, quantity, price } — matches Orders.ts schema
+    total,
   }
 
   const res = await fetch(`${CMS}/api/orders`, {
