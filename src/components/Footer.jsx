@@ -8,7 +8,13 @@ const shopLinks = [
   'Offers',
 ]
 
-const companyLinks = ['About Us', 'Contact', 'FAQ']
+import { Link } from 'react-router-dom'
+
+const companyLinks = [
+  { label: 'About Us', to: '/about'   },
+  { label: 'Contact',  to: '/contact' },
+  { label: 'FAQ',      to: '#'        },
+]
 const policyLinks  = ['Shipping & Returns', 'Privacy Policy']
 
 export default function Footer() {
@@ -35,11 +41,11 @@ export default function Footer() {
         <div>
           <h3 className="font-body text-xs font-semibold tracking-widest uppercase text-brand-gold mb-5">Company</h3>
           <ul className="space-y-3 list-none m-0 p-0">
-            {companyLinks.map(link => (
-              <li key={link}>
-                <a href="#" className="font-body text-sm text-white/70 hover:text-white transition-colors duration-200">
-                  {link}
-                </a>
+            {companyLinks.map(({ label, to }) => (
+              <li key={label}>
+                <Link to={to} className="font-body text-sm text-white/70 hover:text-white transition-colors duration-200">
+                  {label}
+                </Link>
               </li>
             ))}
           </ul>

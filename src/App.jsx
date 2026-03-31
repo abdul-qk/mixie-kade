@@ -39,6 +39,8 @@ import ShopPage           from './pages/ShopPage'
 import ProductPage        from './pages/ProductPage'
 import CheckoutPage       from './pages/CheckoutPage'
 import OrderConfirmationPage from './pages/OrderConfirmationPage'
+import AboutPage             from './pages/AboutPage'
+import ContactPage           from './pages/ContactPage'
 
 function HomePage() {
   return (
@@ -71,6 +73,8 @@ export default function App() {
               <Route path="/shop/:slug"       element={<ProductPage />}           />
               <Route path="/checkout"         element={<CheckoutPage />}          />
               <Route path="/order/:id"        element={<OrderConfirmationPage />} />
+              <Route path="/about"           element={<AboutPage />}             />
+              <Route path="/contact"         element={<ContactPage />}           />
             </Routes>
           </div>
           <Footer />

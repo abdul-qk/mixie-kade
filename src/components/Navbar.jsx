@@ -6,8 +6,8 @@ import CartDrawer from './CartDrawer'
 const navLinks = [
   { label: 'Home',    to: '/'       },
   { label: 'Shop',    to: '/shop'   },
-  { label: 'About',   to: '/#about' },
-  { label: 'Contact', to: '/#'      },
+  { label: 'About',   to: '/about'   },
+  { label: 'Contact', to: '/contact' },
 ]
 
 export default function Navbar() {
