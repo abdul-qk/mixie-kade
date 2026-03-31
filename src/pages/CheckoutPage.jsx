@@ -69,22 +69,25 @@ export default function CheckoutPage() {
             <h2 className="font-display text-xl font-semibold text-brand-navy">Delivery Details</h2>
 
             {[
-              { name: 'customerName', label: 'Full Name',        type: 'text',     required: true,  placeholder: 'Your full name' },
-              { name: 'phone',        label: 'Phone Number',     type: 'tel',      required: true,  placeholder: '07X XXX XXXX' },
-              { name: 'city',         label: 'City',             type: 'text',     required: false, placeholder: 'e.g. Colombo' },
+              { name: 'customerName', label: 'Full Name',    type: 'text', required: true,  placeholder: 'Your full name'  },
+              { name: 'phone',        label: 'Phone Number', type: 'tel',  required: true,  placeholder: '07X XXX XXXX'    },
+              { name: 'city',         label: 'City',         type: 'text', required: false, placeholder: 'e.g. Colombo'    },
             ].map(({ name, label, type, required, placeholder }) => (
               <div key={name}>
-                <label className="block font-body text-sm font-medium text-brand-navy mb-1">
-                  {label}{required && <span className="text-brand-gold ml-0.5">*</span>}
+                <label htmlFor={`field-${name}`} className="block font-body text-sm font-medium text-brand-navy mb-1">
+                  {label}{required && <span className="text-red-500 ml-0.5" aria-hidden="true">*</span>}
+                  {required && <span className="sr-only">(required)</span>}
                 </label>
                 <input
+                  id={`field-${name}`}
                   type={type}
                   name={name}
                   value={form[name]}
                   onChange={handleChange}
                   required={required}
                   placeholder={placeholder}
-                  className="w-full border border-brand-surface focus:border-brand-navy outline-none px-4 py-2.5 font-body text-sm text-brand-navy bg-white transition-colors"
+                  autoComplete={name === 'customerName' ? 'name' : name === 'phone' ? 'tel' : 'address-level2'}
+                  className="w-full border border-brand-surface focus:border-brand-navy outline-none px-4 py-3 font-body text-sm text-brand-navy bg-white transition-colors min-h-[44px]"
                 />
               </div>
             ))}

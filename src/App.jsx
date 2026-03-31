@@ -78,7 +78,7 @@ export default function App() {
         <ScrollToTop />
         <div className="min-h-screen font-body flex flex-col">
           <Navbar />
-          <div className="flex-1">
+          <div className="flex-1 pt-20">
             <Suspense fallback={<PageSpinner />}>
               <Routes>
                 <Route path="/"                 element={<HomePage />}              />

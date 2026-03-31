@@ -41,6 +41,7 @@ export async function getProduct(slug) {
   const params = new URLSearchParams({
     'where[slug][equals]': slug,
     limit: '1',
+    depth: '1', // populate relatedProducts sub-docs
   })
   const res = await fetch(`${CMS}/api/products?${params}`)
   if (!res.ok) throw new Error('Failed to fetch product')

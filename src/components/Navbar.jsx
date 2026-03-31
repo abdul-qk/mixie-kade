@@ -4,8 +4,8 @@ import { useCart } from '../context/CartContext'
 import CartDrawer from './CartDrawer'
 
 const navLinks = [
-  { label: 'Home',    to: '/'       },
-  { label: 'Shop',    to: '/shop'   },
+  { label: 'Home',    to: '/'        },
+  { label: 'Shop',    to: '/shop'    },
   { label: 'About',   to: '/about'   },
   { label: 'Contact', to: '/contact' },
 ]
@@ -18,29 +18,57 @@ export default function Navbar() {
   const location  = useLocation()
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8)
+    const onScroll = () => setScrolled(window.scrollY > 50)
+    onScroll() // sync on mount
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Close mobile menu on route change
   useEffect(() => { setMenuOpen(false) }, [location])
+
+  const isHomePage = location.pathname === '/'
+  const floating   = isHomePage && !scrolled
+
+  // Outer header: transparent + desktop inset padding when floating;
+  // full-width opaque bar when scrolled
+  const headerCls = [
+    'fixed top-0 inset-x-0 z-50 transition-all duration-500',
+    floating
+      ? 'md:px-6 md:pt-5'
+      : 'bg-white shadow-md border-b border-brand-surface/40',
+  ].join(' ')
+
+  // Inner nav pill / bar
+  const navCls = [
+    'flex items-center justify-between px-6 bg-white transition-all duration-500',
+    floating
+      ? `h-16 shadow-lg md:max-w-5xl md:mx-auto md:rounded-full ${
+          menuOpen ? 'rounded-t-2xl' : 'rounded-b-2xl'
+        }`
+      : 'h-20',
+  ].join(' ')
+
+  // Mobile dropdown
+  const dropdownCls = [
+    'animate-slide-down md:hidden bg-white px-6 pb-5',
+    floating
+      ? 'rounded-b-2xl shadow-lg md:max-w-5xl md:mx-auto'
+      : 'border-t border-brand-surface shadow-sm',
+  ].join(' ')
 
   return (
     <>
-      <header
-        className={`sticky top-0 z-40 bg-white transition-shadow duration-300 ${
-          scrolled ? 'shadow-md border-b border-brand-surface' : ''
-        }`}
-      >
-        <nav className="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-20">
+      <header className={headerCls}>
+
+        {/* ── Nav bar ─────────────────────────────────────────────── */}
+        <nav className={navCls}>
 
           {/* Logo */}
-          <Link to="/" className="flex items-center">
-            <img src="/logo.jpeg" alt="Mixie Kadai" className="h-15 w-auto object-contain" />
+          <Link to="/" className="flex items-center flex-shrink-0">
+            <img src="/logo.jpeg" alt="Mixie Kadai" className="h-10 w-auto object-contain" />
           </Link>
 
-          {/* Desktop nav links */}
+          {/* Desktop links */}
           <ul className="hidden md:flex items-center gap-8 list-none m-0 p-0">
             {navLinks.map(({ label, to }) => (
               <li key={label}>
@@ -56,7 +84,6 @@ export default function Navbar() {
 
           {/* Cart + hamburger */}
           <div className="flex items-center gap-4">
-            {/* Cart icon with badge */}
             <button
               onClick={() => setCartOpen(true)}
               aria-label={`View cart (${count} items)`}
@@ -91,15 +118,15 @@ export default function Navbar() {
           </div>
         </nav>
 
-        {/* Mobile dropdown */}
+        {/* ── Mobile dropdown ──────────────────────────────────────── */}
         {menuOpen && (
-          <div className="animate-slide-down md:hidden bg-white border-t border-brand-surface px-6 pb-4">
+          <div className={dropdownCls}>
             <ul className="flex flex-col gap-1 list-none m-0 p-0 pt-2">
               {navLinks.map(({ label, to }) => (
                 <li key={label}>
                   <Link
                     to={to}
-                    className="block py-2 font-body text-sm font-medium text-brand-navy hover:text-brand-gold transition-colors duration-200"
+                    className="block py-2.5 font-body text-sm font-medium text-brand-navy hover:text-brand-gold transition-colors duration-200"
                   >
                     {label}
                   </Link>
@@ -108,6 +135,7 @@ export default function Navbar() {
             </ul>
           </div>
         )}
+
       </header>
 
       <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />

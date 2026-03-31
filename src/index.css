@@ -92,3 +92,37 @@ body {
   to   { opacity: 1; }
 }
 .animate-fade { animation: fadeIn 0.5s ease-out forwards; }
+
+/* ── Focus ring system ───────────────────────────────────────── */
+/* Apply to all interactive elements. Uses focus-visible so mouse
+   users never see the ring — only keyboard users do.             */
+:focus-visible {
+  outline: 2px solid var(--color-brand-gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Remove default outline only when we supply focus-visible */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ── Reduced-motion overrides ────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .animate-fade-in,
+  .animate-fade-in-delay,
+  .animate-fade-in-delay-2,
+  .animate-slide-down,
+  .animate-fade {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ── Smooth scrolling (respects reduced-motion) ──────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}

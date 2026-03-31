@@ -16,16 +16,29 @@ const CATEGORIES = [
 
 function ProductCard({ product }) {
   const { addToCart } = useCart()
+  const [added, setAdded] = useState(false)
   const img = product.images?.[0]?.url
 
+  function handleAddToCart() {
+    addToCart({
+      slug:  product.slug,
+      name:  product.name,
+      price: product.price,
+      image: img || '',
+    })
+    setAdded(true)
+    setTimeout(() => setAdded(false), 1800)
+  }
+
   return (
-    <div className="group bg-white border border-brand-surface hover:shadow-lg transition-all duration-200 flex flex-col">
+    <div className="group bg-white border border-brand-surface hover:border-brand-navy/20 hover:shadow-lg transition-all duration-200 flex flex-col">
       {/* Image */}
-      <Link to={`/shop/${product.slug}`} className="block overflow-hidden">
+      <Link to={`/shop/${product.slug}`} className="block overflow-hidden bg-brand-surface">
         {img ? (
           <img
             src={img}
             alt={product.images[0].alt || product.name}
+            loading="lazy"
             className="w-full aspect-square object-contain p-4 group-hover:scale-105 transition-transform duration-300"
           />
         ) : (
@@ -37,8 +50,8 @@ function ProductCard({ product }) {
 
       {/* Info */}
       <div className="p-4 flex flex-col flex-1">
-        <Link to={`/shop/${product.slug}`}>
-          <h3 className="font-display text-lg font-semibold text-brand-navy leading-snug hover:text-brand-gold transition-colors">
+        <Link to={`/shop/${product.slug}`} className="group/title">
+          <h3 className="font-display text-lg font-semibold text-brand-navy leading-snug group-hover/title:text-brand-gold transition-colors duration-200">
             {product.name}
           </h3>
         </Link>
@@ -46,19 +59,19 @@ function ProductCard({ product }) {
         {/* Specs badges */}
         <div className="flex flex-wrap gap-2 mt-2 mb-3">
           {product.wattage && (
-            <span className="text-xs font-body font-medium bg-brand-surface text-brand-navy px-2 py-0.5">
+            <span className="text-xs font-body font-medium bg-brand-surface text-brand-navy px-2 py-1">
               {product.wattage}W
             </span>
           )}
           {product.jars && (
-            <span className="text-xs font-body font-medium bg-brand-surface text-brand-navy px-2 py-0.5">
+            <span className="text-xs font-body font-medium bg-brand-surface text-brand-navy px-2 py-1">
               {product.jars} Jars
             </span>
           )}
         </div>
 
         {/* Price */}
-        <div className="mt-auto flex items-baseline gap-2">
+        <div className="mt-auto flex items-baseline gap-2 mb-3">
           <span className="font-body font-bold text-xl text-brand-navy">
             Rs. {product.price.toLocaleString()}
           </span>
@@ -70,15 +83,23 @@ function ProductCard({ product }) {
         </div>
 
         <button
-          onClick={() => addToCart({
-            slug:  product.slug,
-            name:  product.name,
-            price: product.price,
-            image: img || '',
-          })}
-          className="mt-3 w-full bg-brand-navy hover:bg-brand-gold text-white font-body font-semibold text-sm py-2.5 transition-colors duration-200"
+          onClick={handleAddToCart}
+          disabled={added}
+          aria-label={added ? `${product.name} added to cart` : `Add ${product.name} to cart`}
+          className={`w-full min-h-[44px] font-body font-semibold text-sm transition-colors duration-200 cursor-pointer flex items-center justify-center gap-2 ${
+            added
+              ? 'bg-green-600 text-white cursor-default'
+              : 'bg-brand-navy hover:bg-brand-gold text-white'
+          }`}
         >
-          Add to Cart
+          {added ? (
+            <>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+              </svg>
+              Added
+            </>
+          ) : 'Add to Cart'}
         </button>
       </div>
     </div>
@@ -124,10 +145,11 @@ export default function ShopPage() {
             <button
               key={cat.value}
               onClick={() => setActiveTab(cat.value)}
-              className={`font-body text-sm font-medium px-4 py-2 border transition-colors duration-150 ${
+              aria-pressed={activeTab === cat.value}
+              className={`font-body text-sm font-medium px-4 min-h-[44px] border transition-colors duration-150 cursor-pointer ${
                 activeTab === cat.value
                   ? 'bg-brand-navy text-white border-brand-navy'
-                  : 'bg-white text-brand-navy border-brand-surface hover:border-brand-navy'
+                  : 'bg-white text-brand-navy border-brand-surface hover:border-brand-navy hover:bg-brand-surface'
               }`}
             >
               {cat.label}
