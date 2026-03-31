@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useReveal } from '../hooks/useReveal'
 
 const stats = [
   { number: '20+',        label: 'Mixer Grinder Models'  },
@@ -16,6 +17,15 @@ const reviews = [
 ]
 
 export default function AboutPage() {
+  const companyRef  = useReveal()
+  const ownerRef    = useReveal()
+  const statsRef    = useReveal()
+  const missionRef  = useReveal()
+  const infoRef     = useReveal()
+  const reviewsRef  = useReveal()
+  const photosRef   = useReveal()
+  const ctaRef      = useReveal()
+
   return (
     <div className="min-h-screen bg-white">
 
@@ -43,10 +53,10 @@ export default function AboutPage() {
       </div>
 
       {/* ── 2. About the Company ──────────────────────────────────── */}
-      <section className="py-20 px-6">
+      <section ref={companyRef} className="py-20 px-6">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Text */}
-          <div>
+          <div className="reveal reveal-left">
             <p className="font-body text-xs font-semibold tracking-widest text-brand-gold uppercase mb-3">
               About Mixie Kadai
             </p>
@@ -65,7 +75,7 @@ export default function AboutPage() {
           </div>
 
           {/* Shop photo placeholder */}
-          <div className="relative">
+          <div className="reveal reveal-right delay-2 relative">
             {/* Shop photo — swap with real image */}
             <div className="bg-brand-surface rounded-xl aspect-[4/3] flex items-center justify-center overflow-hidden">
               <div className="w-2/3 h-2/3 bg-brand-navy/10 rounded-lg flex items-center justify-center">
@@ -85,10 +95,10 @@ export default function AboutPage() {
       </section>
 
       {/* ── 3. About the Owner ────────────────────────────────────── */}
-      <section className="py-20 px-6 bg-brand-surface">
+      <section ref={ownerRef} className="py-20 px-6 bg-brand-surface">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Portrait placeholder — left on desktop */}
-          <div className="flex justify-center lg:justify-start order-2 lg:order-1">
+          <div className="reveal reveal-left order-2 lg:order-1 flex justify-center lg:justify-start">
             {/* Owner portrait — swap with real image */}
             <div className="bg-brand-navy/10 rounded-2xl aspect-square w-full max-w-xs flex items-center justify-center">
               <div className="text-center">
@@ -104,7 +114,7 @@ export default function AboutPage() {
           </div>
 
           {/* Text — right on desktop */}
-          <div className="order-1 lg:order-2">
+          <div className="reveal reveal-right delay-2 order-1 lg:order-2">
             <p className="font-body text-xs font-semibold tracking-widest text-brand-gold uppercase mb-3">
               Meet the Owner
             </p>
@@ -127,10 +137,10 @@ export default function AboutPage() {
       </section>
 
       {/* ── 4. Stats Strip ────────────────────────────────────────── */}
-      <section className="py-16 px-6 bg-brand-navy">
+      <section ref={statsRef} className="py-16 px-6 bg-brand-navy">
         <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
-          {stats.map(({ number, label }) => (
-            <div key={label} className="text-center">
+          {stats.map(({ number, label }, i) => (
+            <div key={label} className={`reveal reveal-scale delay-${i + 1} text-center`}>
               <p className="font-display text-4xl md:text-5xl font-semibold text-brand-gold mb-2">{number}</p>
               <p className="font-body text-sm text-white/60">{label}</p>
             </div>
@@ -139,9 +149,9 @@ export default function AboutPage() {
       </section>
 
       {/* ── 5. Mission / Vision / Values ──────────────────────────── */}
-      <section className="py-20 px-6">
+      <section ref={missionRef} className="py-20 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
+          <div className="reveal text-center mb-12">
             <p className="font-body text-xs font-semibold tracking-widest text-brand-gold uppercase mb-3">
               What We Stand For
             </p>
@@ -151,7 +161,7 @@ export default function AboutPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Mission */}
-            <div className="bg-white border border-brand-surface p-8 rounded-xl">
+            <div className="reveal delay-1 bg-white border border-brand-surface p-8 rounded-xl">
               <div className="w-10 h-10 bg-brand-gold/10 rounded-lg flex items-center justify-center mb-5">
                 <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#C9A84C" strokeWidth="1.8">
                   <circle cx="12" cy="12" r="10" strokeLinecap="round" strokeLinejoin="round" />
@@ -166,7 +176,7 @@ export default function AboutPage() {
             </div>
 
             {/* Vision */}
-            <div className="bg-white border border-brand-surface p-8 rounded-xl">
+            <div className="reveal delay-2 bg-white border border-brand-surface p-8 rounded-xl">
               <div className="w-10 h-10 bg-brand-gold/10 rounded-lg flex items-center justify-center mb-5">
                 <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#C9A84C" strokeWidth="1.8">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z" />
@@ -180,7 +190,7 @@ export default function AboutPage() {
             </div>
 
             {/* Values */}
-            <div className="bg-white border border-brand-surface p-8 rounded-xl">
+            <div className="reveal delay-3 bg-white border border-brand-surface p-8 rounded-xl">
               <div className="w-10 h-10 bg-brand-gold/10 rounded-lg flex items-center justify-center mb-5">
                 <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#C9A84C" strokeWidth="1.8">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
@@ -196,9 +206,9 @@ export default function AboutPage() {
       </section>
 
       {/* ── 6. Delivery & Warranty ────────────────────────────────── */}
-      <section className="py-20 px-6 bg-brand-surface">
+      <section ref={infoRef} className="py-20 px-6 bg-brand-surface">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
+          <div className="reveal text-center mb-12">
             <p className="font-body text-xs font-semibold tracking-widest text-brand-gold uppercase mb-3">
               Peace of Mind
             </p>
@@ -208,7 +218,7 @@ export default function AboutPage() {
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Delivery */}
-            <div className="bg-brand-navy text-white p-8 rounded-xl">
+            <div className="reveal reveal-left delay-1 bg-brand-navy text-white p-8 rounded-xl">
               <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center mb-5">
                 <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth="1.8">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3" />
@@ -239,7 +249,7 @@ export default function AboutPage() {
             </div>
 
             {/* Warranty */}
-            <div className="bg-brand-gold-light border border-brand-gold p-8 rounded-xl">
+            <div className="reveal reveal-right delay-2 bg-brand-gold-light border border-brand-gold p-8 rounded-xl">
               <div className="w-10 h-10 bg-brand-gold/20 rounded-lg flex items-center justify-center mb-5">
                 <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#C9A84C" strokeWidth="1.8">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
@@ -270,9 +280,9 @@ export default function AboutPage() {
       </section>
 
       {/* ── 7. Customer Reviews ───────────────────────────────────── */}
-      <section className="py-20 px-6">
+      <section ref={reviewsRef} className="py-20 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
+          <div className="reveal text-center mb-12">
             <p className="font-body text-xs font-semibold tracking-widest text-brand-gold uppercase mb-3">
               What Customers Say
             </p>
@@ -284,8 +294,8 @@ export default function AboutPage() {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {reviews.map(({ text, author, city }) => (
-              <div key={author} className="bg-white border border-brand-surface p-6 rounded-xl flex flex-col gap-4">
+            {reviews.map(({ text, author, city }, i) => (
+              <div key={author} className={`reveal delay-${Math.min(i + 1, 6)} bg-white border border-brand-surface p-6 rounded-xl flex flex-col gap-4`}>
                 {/* Stars */}
                 <div className="flex gap-0.5">
                   {[...Array(5)].map((_, i) => (
@@ -306,7 +316,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── 8. Photo Placeholders ─────────────────────────────────── */}
-      <section className="py-20 px-6 bg-brand-surface">
+      <section ref={photosRef} className="py-20 px-6 bg-brand-surface">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <p className="font-body text-xs font-semibold tracking-widest text-brand-gold uppercase mb-3">
@@ -318,7 +328,7 @@ export default function AboutPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Shop photos placeholder */}
-            <div className="bg-brand-navy/10 rounded-xl aspect-video flex flex-col items-center justify-center gap-3">
+            <div className="reveal reveal-left delay-1 bg-brand-navy/10 rounded-xl aspect-video flex flex-col items-center justify-center gap-3">
               <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="#1B3045" strokeWidth="1.5" opacity="0.3">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z" />
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 21V12h6v9" />
@@ -327,7 +337,7 @@ export default function AboutPage() {
               <p className="font-body text-xs text-brand-navy/30">Add shop photos here</p>
             </div>
             {/* Delivery photos placeholder */}
-            <div className="bg-brand-gold-light rounded-xl aspect-video flex flex-col items-center justify-center gap-3">
+            <div className="reveal reveal-right delay-2 bg-brand-gold-light rounded-xl aspect-video flex flex-col items-center justify-center gap-3">
               <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="#C9A84C" strokeWidth="1.5" opacity="0.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3" />
                 <rect x="9" y="11" width="14" height="10" rx="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -340,9 +350,9 @@ export default function AboutPage() {
       </section>
 
       {/* ── CTA ───────────────────────────────────────────────────── */}
-      <section className="py-16 px-6 bg-brand-navy text-white text-center">
+      <section ref={ctaRef} className="py-16 px-6 bg-brand-navy text-white text-center">
         <div className="max-w-2xl mx-auto">
-          <h2 className="font-display text-3xl md:text-4xl font-semibold mb-4">Ready to Shop?</h2>
+          <h2 className="reveal font-display text-3xl md:text-4xl font-semibold mb-4">Ready to Shop?</h2>
           <p className="font-body text-white/70 text-base mb-8">
             Browse our full range of mixer grinders, spare parts, and accessories.
           </p>

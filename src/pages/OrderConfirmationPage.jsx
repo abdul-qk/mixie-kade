@@ -7,10 +7,10 @@ export default function OrderConfirmationPage() {
 
   return (
     <div className="min-h-screen bg-brand-cream flex items-center justify-center px-6">
-      <div className="max-w-lg w-full bg-white border border-brand-surface p-8 text-center">
+      <div className="animate-fade-in max-w-lg w-full bg-white border border-brand-surface p-8 text-center">
 
         {/* Success icon */}
-        <div className="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6">
+        <div className="animate-fade-in-delay w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6">
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" className="text-green-600">
             <path strokeLinecap="round" strokeLinejoin="round" d="m5 13 4 4L19 7" />
           </svg>

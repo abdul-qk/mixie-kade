@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useReveal } from '../hooks/useReveal'
 
 // Categories parsed from client brief (pipe-separated)
 const categories = [
@@ -12,22 +13,24 @@ const categories = [
 ]
 
 export default function CategoryGrid() {
+  const sectionRef = useReveal()
+
   return (
-    <section className="py-20 bg-white">
+    <section ref={sectionRef} className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <h2 className="font-display text-4xl md:text-5xl font-semibold text-brand-navy mb-3">
+        <h2 className="reveal font-display text-4xl md:text-5xl font-semibold text-brand-navy mb-3">
           Shop by Category
         </h2>
-        <p className="font-body text-brand-muted text-base mb-12">
+        <p className="reveal delay-1 font-body text-brand-muted text-base mb-12">
           Everything your kitchen — and your grinder — needs.
         </p>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {categories.map(({ name, slug, bg, text }) => (
+          {categories.map(({ name, slug, bg, text }, i) => (
             <Link
               key={name}
               to={slug ? `/shop?category=${slug}` : '/shop'}
-              className={`group ${bg} ${text} p-6 flex flex-col justify-between min-h-36 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg`}
+              className={`reveal delay-${Math.min(i + 1, 6)} group ${bg} ${text} p-6 flex flex-col justify-between min-h-36 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg`}
             >
               <span className="font-display text-xl font-semibold leading-snug">{name}</span>
               <span className="font-body text-sm font-medium mt-4 opacity-80 group-hover:opacity-100 transition-opacity">

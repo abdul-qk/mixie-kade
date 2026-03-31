@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useReveal } from '../hooks/useReveal'
 
 // TODO: Replace with Hashim's WhatsApp number (digits only, no + or spaces)
 const WHATSAPP = '94XXXXXXXXXX'
@@ -50,6 +51,7 @@ export default function ContactPage() {
   const [phone,   setPhone]   = useState('')
   const [message, setMessage] = useState('')
   const [sent,    setSent]    = useState(false)
+  const formRef = useReveal()
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -82,11 +84,11 @@ export default function ContactPage() {
       </div>
 
       {/* ── Form + Info ───────────────────────────────────────────── */}
-      <section className="py-20 px-6">
+      <section ref={formRef} className="py-20 px-6">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16">
 
           {/* Contact form — 3 cols */}
-          <div className="lg:col-span-3">
+          <div className="reveal reveal-left lg:col-span-3">
             <h2 className="font-display text-2xl font-semibold text-brand-navy mb-6">
               Send a Message
             </h2>
@@ -173,7 +175,7 @@ export default function ContactPage() {
           </div>
 
           {/* Contact info card — 2 cols */}
-          <div className="lg:col-span-2">
+          <div className="reveal reveal-right delay-2 lg:col-span-2">
             <div className="bg-brand-surface rounded-xl p-8">
               <h2 className="font-display text-2xl font-semibold text-brand-navy mb-6">
                 Contact Info

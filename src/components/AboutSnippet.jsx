@@ -1,10 +1,14 @@
+import { useReveal } from '../hooks/useReveal'
+
 export default function AboutSnippet() {
+  const sectionRef = useReveal()
+
   return (
-    <section className="py-20 bg-brand-surface">
+    <section ref={sectionRef} className="py-20 bg-brand-surface">
       <div className="max-w-7xl mx-auto px-6 lg:px-10 flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
 
         {/* Text — left */}
-        <div className="w-full lg:w-1/2">
+        <div className="reveal reveal-left w-full lg:w-1/2">
           <p className="font-body text-sm font-semibold tracking-widest text-brand-gold uppercase mb-4">
             Our Story
           </p>
@@ -29,7 +33,7 @@ export default function AboutSnippet() {
         </div>
 
         {/* Image placeholder — right */}
-        <div className="w-full lg:w-1/2 flex justify-center">
+        <div className="reveal reveal-right delay-2 w-full lg:w-1/2 flex justify-center">
           <div className="relative w-full max-w-md aspect-[4/3] bg-brand-navy overflow-hidden">
             {/* Abstract decorative shapes */}
             <div className="absolute top-0 right-0 w-1/2 h-full bg-brand-navy-light opacity-50" />

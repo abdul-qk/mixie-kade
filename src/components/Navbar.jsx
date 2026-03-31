@@ -93,7 +93,7 @@ export default function Navbar() {
 
         {/* Mobile dropdown */}
         {menuOpen && (
-          <div className="md:hidden bg-white border-t border-brand-surface px-6 pb-4">
+          <div className="animate-slide-down md:hidden bg-white border-t border-brand-surface px-6 pb-4">
             <ul className="flex flex-col gap-1 list-none m-0 p-0 pt-2">
               {navLinks.map(({ label, to }) => (
                 <li key={label}>

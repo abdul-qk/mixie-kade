@@ -1,3 +1,5 @@
+import { useReveal } from '../hooks/useReveal'
+
 const usps = [
   {
     label: '20+ Mixer Grinder Models',
@@ -45,12 +47,17 @@ const usps = [
 ]
 
 export default function USPStrip() {
+  const sectionRef = useReveal()
+
   return (
-    <section className="bg-brand-surface py-10 border-y border-brand-navy/10">
+    <section ref={sectionRef} className="bg-brand-surface py-10 border-y border-brand-navy/10">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <ul className="grid grid-cols-2 lg:grid-cols-4 gap-6 list-none m-0 p-0">
-          {usps.map(({ label, sub, icon }) => (
-            <li key={label} className="flex items-start gap-4">
+          {usps.map(({ label, sub, icon }, i) => (
+            <li
+              key={label}
+              className={`reveal delay-${i + 1} flex items-start gap-4`}
+            >
               <span className="text-brand-gold flex-shrink-0 mt-0.5">{icon}</span>
               <div>
                 <p className="font-body font-semibold text-sm text-brand-navy leading-snug">{label}</p>
