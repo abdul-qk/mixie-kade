@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useReveal } from '../hooks/useReveal'
 
 // TODO: Replace with Hashim's WhatsApp number (digits only, no + or spaces)
-const WHATSAPP = '94XXXXXXXXXX'
+const WHATSAPP = '94776952531'
 
 const contactInfo = [
   {
@@ -22,7 +22,7 @@ const contactInfo = [
       </svg>
     ),
     label: 'Phone',
-    value: '+94 XX XXX XXXX', // TODO: Replace with real phone number
+    value: '+94776952531',
   },
   {
     icon: (

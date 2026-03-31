@@ -27,12 +27,12 @@ export default function Hero() {
             >
               Shop Now
             </Link>
-            <a
-              href="#about"
+            <Link
+              to="/about"
               className="inline-block font-body font-medium text-sm text-brand-navy underline underline-offset-4 decoration-brand-gold hover:text-brand-gold transition-colors duration-200"
             >
               Learn More →
-            </a>
+            </Link>
           </div>
         </div>
 
