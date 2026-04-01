@@ -1,6 +1,16 @@
-import { createContext, useContext, useReducer, useCallback } from 'react'
+import { createContext, useContext, useReducer, useCallback, useEffect } from 'react'
 
 const CartContext = createContext(null)
+const STORAGE_KEY = 'mixie_cart'
+
+function load() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY)
+    return raw ? JSON.parse(raw) : []
+  } catch {
+    return []
+  }
+}
 
 function cartReducer(state, action) {
   switch (action.type) {
@@ -31,7 +41,16 @@ function cartReducer(state, action) {
 }
 
 export function CartProvider({ children }) {
-  const [items, dispatch] = useReducer(cartReducer, [])
+  const [items, dispatch] = useReducer(cartReducer, [], load)
+
+  // Persist to localStorage whenever the cart changes
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(items))
+    } catch {
+      // storage quota exceeded or private-browsing restriction — fail silently
+    }
+  }, [items])
 
   const addToCart    = useCallback(product => dispatch({ type: 'ADD',        product }), [])
   const removeFromCart = useCallback(slug  => dispatch({ type: 'REMOVE',     slug    }), [])
