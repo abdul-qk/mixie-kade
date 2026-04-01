@@ -76,6 +76,7 @@ export default function ProductPage() {
 
   function handleAddToCart() {
     addToCart({
+      id:    product.id,
       slug:  product.slug,
       name:  product.name,
       price: product.price,

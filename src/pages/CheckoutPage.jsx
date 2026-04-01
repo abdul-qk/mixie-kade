@@ -39,7 +39,8 @@ export default function CheckoutPage() {
       const orderData = {
         ...form,
         items: items.map(i => ({
-          productName: i.name,
+          product:     i.id,        // Payload relationship → products collection
+          productName: i.name,      // snapshot kept for historical record
           productSlug: i.slug,
           quantity:    i.quantity,
           price:       i.price,
