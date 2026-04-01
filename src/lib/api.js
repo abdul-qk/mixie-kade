@@ -56,13 +56,13 @@ export async function getProduct(slug) {
  */
 export async function placeOrder({ customerName, phone, address, city, notes, items, total }) {
   const payload = {
-    status:       'pending',
+    // status intentionally omitted — Payload applies defaultValue from the schema
     customerName,
     phone,
     address,
     city,
     notes:        notes || '',
-    items,   // array of { productName, productSlug, quantity, price } — matches Orders.ts schema
+    items,   // array of { product (relationship), productName, productSlug, quantity, price }
     total,
   }
 
